@@ -14,7 +14,6 @@ class Blockchain:
     def __init__(self):
        self.current_information = []
        self.chain = []
-       #self.nodes = set()
 
        # Create the genesis block
        self.new_block(previous_hash='1')
