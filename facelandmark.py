@@ -76,6 +76,15 @@ class FaceLandMark:
 
         self.faces_rects = haar_cascade_face.detectMultiScale(self.image_gray);
 
+        #Draw rectangle around faces
+        for face in self.faces_rects:
+            #save the coordinates in x, y, w, d variables
+            (x,y,w,d) = face
+            # Draw a white coloured rectangle around each face using the face's coordinates
+            # on the "image_template" with the thickness of 2
+            cv2.rectangle(self.image_rgb,(x,y),(x+w, y+d),(0, 255, 0), 2)
+
+        #plt.axis("off")
         plt.imshow(self.image_rgb)
 
         return len(self.faces_rects)
@@ -93,4 +102,12 @@ class FaceLandMark:
             for x,y in landmark[0]:
                 #push into array
                 arr.append([float(x), float(y)])
+                #Draw landmarks dots
+                cv2.circle(self.image_rgb, (int(x), int(y)), 1, (255, 0, 0), 5)
+
+        plt.axis("off")
+        plt.imshow(self.image_rgb)
+
+        plt.savefig('./output/test.jpg')
+
         return arr
